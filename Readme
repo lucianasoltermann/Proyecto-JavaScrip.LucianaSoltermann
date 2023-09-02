@@ -1,0 +1,9 @@
+const balance = (a, b, c) => {
+    return ingresosneto - (gastos + deudas);
+}
+console.log(balance (ingresosneto, gastos, deudas));
+//Con esta función, busco visibilizar la diferencia de dinero con la que cuenta la persona luego de pagar sus deudas y gastos
+
+for (let i = 1; i <=12; i++) {
+    console.log (inversiones * i)}
+//Con este ciclo intento simular distintos escenarios para el usuario, en este caso el ahorro que va a lograr en un año con sus inversiones mensuales. 
