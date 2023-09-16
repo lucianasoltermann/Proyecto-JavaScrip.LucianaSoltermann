@@ -1,38 +1,80 @@
-let nombreUsuario = prompt ("Ingrese su nombre")
-    console.log("Bienvenido " +  nombreUsuario);
+let usuario = {
+    nombre: prompt("Ingrese su nombre"),
+    edad: parseInt(prompt("Ingrese su edad")),
+    mail: prompt("Ingrese su correo"),
+  };
+  
+console.log("Bienvenido " + usuario.nombre);
+console.log("Tienes " + usuario.edad + " años.");
+console.log("Tu correo es: " + usuario.mail);
+
 
 let ingresosneto = parseInt(prompt("Escriba su ingreso neto mensual"))
-    console.log(ingresosneto);
+console.log("Tus ingresos este mes son de " + ingresosneto);
 
-let gastos = parseInt(prompt ("Ingrese sus gastos mensuales"));
-    if (gastos ==0){
-        console.log("Ingresaste un valor no válido para gastos");
-    }
-    else{
-        console.log("Gastos " + gastos);
-    }
+const gastos = [];
+const deudas = [];
+const inversiones = [];
 
-let inversiones = parseInt (prompt ("Ingrese las inversiones que desea hacer este mes"));
-    if (inversiones ==0){
-    console.log("Ingresaste un valor no válido para inversiones");
-    }
-    else{
-    console.log("Inversiones " + inversiones);
-    }
+while (true) {
+  const tipo = prompt("Ingrese el tipo (gasto/deuda/inversion) o 'fin' para salir:");
+  if (tipo === "fin") break;
 
-let deudas = parseInt (prompt("Ingrese si se presenta alguna deuda"));
-    if (deudas ==0){
-        console.log("Ingresaste un valor no válido para deudas");
-    }
-    else{
-        console.log("Deudas " + deudas);
-    }
+  const monto = parseFloat(prompt("Ingrese el monto:"));
 
-const balance = (a, b, c) => {
-    return ingresosneto - (gastos + deudas);
+  if (tipo === "gasto") {
+    agregarGasto(monto);
+  } else if (tipo === "deuda") {
+    agregarDeuda(monto);
+  } else if (tipo === "inversion") {
+    agregarInversion(monto);
+  }
 }
-console.log(balance (ingresosneto, gastos, deudas));
 
+function agregarGasto(monto) {
+  gastos.push(monto);
+}
+
+function agregarDeuda(monto) {
+  deudas.push(monto);
+}
+
+function agregarInversion(monto) {
+  inversiones.push(monto);
+}
+
+console.log("Tus gastos este mes son:");
+gastos.forEach(gasto => {
+  console.log(gasto);
+});
+
+let gastoTotal = 0;
+for (let i = 0; i < gastos.length; i++) {
+  gastoTotal += gastos[i];
+}
+console.log("El gasto total es: $" + gastoTotal)
+
+console.log("Tus deudas este mes son:");
+deudas.forEach(deuda => {
+  console.log(deuda);
+});
+
+let deudaTotal = 0;
+for (let i = 0; i < deudas.length; i++) {
+    deudaTotal += deudas[i];
+}
+console.log("Las deudas totales son: $" + deudaTotal)
+
+console.log("Tus inversiones este mes son:");
+inversiones.forEach(inversion => {
+  console.log(inversion);
+});
 
 for (let i = 1; i <=12; i++) {
-    console.log (inversiones * i)}
+    console.log ("Estos serian tus ahorros, mes a mes, " + inversiones * i + " si tus inversiones se mantienen.")}
+
+
+const balance = (a, b, c) => {
+    return ingresosneto - (gastoTotal+ deudaTotal);
+}
+alert("Tu dinero disponible para este mes es $" + balance (ingresosneto, gastos, deudas));
