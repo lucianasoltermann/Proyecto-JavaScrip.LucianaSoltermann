@@ -19,32 +19,50 @@
                 <input type="number" id="edad" name="edad" placeholder="Ingrese su edad">
             </div>
             <div class="contenedores">
-                <label for="email">Ingrese su nombre:</label>
+                <label for="email">Ingrese su correo:</label>
                 <input type="email" id="email" name="email" placeholder="Ingrese su correo electrónico.">
             </div>
         </div>
        
-        
-        <div class="contenedores">
-            <label for="ingresos">Ingrese sus ingresos mensuales:</label>
-            <input type="number" id="ingresos" name="" placeholder="Ingrese sus ingresos mensuales">
+        <div class="contenedores" id="agregar">
+            <h4>INGRESOS</h4>
+            <form action="" id="agregar-form" class="form">
+                <input type="text" id="agregar-input" class="form-input">
+                <input type="submit" id="agregar-submit" class="form-submit" value="Agregar">
+            </form>
         </div>
-
-        <div class="contenedores">
-            <label for="gastos">Ingrese sus gastos mensuales:</label>
-            <input type="number" id="gastos" name="" placeholder="Ingrese sus gastos mensuales">
+        <div class="contenedores" id="gastos">
+            <h4>GASTOS</h4>
+            <form action="" id="gastos-form" class="form">
+                <input type="text" id="gastos-input" class="form-input">
+                <input type="submit" id="gastos-submit" class="form-submit" value="Agregar">
+            </form>
         </div>
-
-        <div class="contenedores">
-            <label for="deudas">Ingrese si tiene deudas:</label>
-            <input type="number" id="deudas" name="" placeholder="Ingrese si tiene deudas">
+        <div class="contenedores" id="deudas">
+            <h4>DEUDAS</h4>
+            <form action="" id="deudas-form" class="form">
+                <input type="text" id="deudas-input" class="form-input">
+                <input type="submit" id="deudas-submit" class="form-submit" value="Agregar">
+            </form>
         </div>
-
-        <div class="contenedores">
-            <label for="inversiones">Ingrese su inversión mensual:</label>
-            <input type="number" id="inversiones" name="" placeholder="Ingrese su inversión mensual">
+        <div class="contenedores" id="inversiones">
+            <h4>INVERSIONES</h4>
+            <form action="" id="inversiones-form" class="form">
+                <input type="text" id="inversiones-input" class="form-input">
+                <input type="submit" id="inversiones-submit" class="form-submit" value="Agregar">
+            </form>
         </div>
     </div>  
+    <div class="botones">
+        <button class="btnCalcular" id="btnCalcular">Calcular balance mensual</button>
+        <button type="reset" class="reset" id="reset">Volver a calcular</button>
+    </div>
+    <div id="resultados" class="resultados">
+        <h3 class="tituloResultados">RESULTADOS</h3>
+    </div>
+        
+
+    
 
 <script src="./JS/index.js"></script>
 </body>

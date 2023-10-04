@@ -1,80 +1,164 @@
-let usuario = {
-    nombre: prompt("Ingrese su nombre"),
-    edad: parseInt(prompt("Ingrese su edad")),
-    mail: prompt("Ingrese su correo"),
-  };
-  
-console.log("Bienvenido " + usuario.nombre);
-console.log("Tienes " + usuario.edad + " años.");
-console.log("Tu correo es: " + usuario.mail);
+const arrayIngresos = JSON.parse(localStorage.getItem('arrayIngresos')) || [];
+const arrayGastos = JSON.parse(localStorage.getItem('arrayGastos')) || [];
+const arrayDeudas = JSON.parse(localStorage.getItem('arrayDeudas')) || [];
+const arrayInversiones = JSON.parse(localStorage.getItem('arrayInversiones')) || [];
 
+const agregarForm = document.querySelector("#agregar-form");
+const agregarInput = document.querySelector("#agregar-input");
+const agregar = document.querySelector("#agregar");
 
-let ingresosneto = parseInt(prompt("Escriba su ingreso neto mensual"))
-console.log("Tus ingresos este mes son de " + ingresosneto);
+agregarForm.addEventListener("submit", agregarItems);
 
-const gastos = [];
-const deudas = [];
-const inversiones = [];
+function agregarItems(e) {
+    e.preventDefault();
 
-while (true) {
-  const tipo = prompt("Ingrese el tipo (gasto/deuda/inversion) o 'fin' para salir:");
-  if (tipo === "fin") break;
+    if (agregarInput.value != "") {
+        arrayIngresos.push(agregarInput.value);
+        let item = document.createElement("li");
+        item.innerText = agregarInput.value;
+        agregar.append(item);
 
-  const monto = parseFloat(prompt("Ingrese el monto:"));
+        // Guardar en localStorage después de agregar
+        localStorage.setItem('arrayIngresos', JSON.stringify(arrayIngresos));
+    } else {
+        alert("Input vacío!")
+    }
 
-  if (tipo === "gasto") {
-    agregarGasto(monto);
-  } else if (tipo === "deuda") {
-    agregarDeuda(monto);
-  } else if (tipo === "inversion") {
-    agregarInversion(monto);
-  }
+    agregarInput.focus();
+    agregarForm.reset();
 }
 
-function agregarGasto(monto) {
-  gastos.push(monto);
+const gastosForm = document.querySelector("#gastos-form");
+const gastosInput = document.querySelector("#gastos-input");
+const gastos = document.querySelector("#gastos");
+
+gastosForm.addEventListener("submit", agregarItemsGastos);
+
+function agregarItemsGastos(e) {
+    e.preventDefault();
+
+    if (gastosInput.value != "") {
+        arrayGastos.push(gastosInput.value);
+        let item = document.createElement("li");
+        item.innerText = gastosInput.value;
+        gastos.append(item);
+
+        // Guardar en localStorage después de agregar
+        localStorage.setItem('arrayGastos', JSON.stringify(arrayGastos));
+    } else {
+        alert("Input vacío!")
+    }
+
+    gastosInput.focus();
+    gastosForm.reset();
 }
 
-function agregarDeuda(monto) {
-  deudas.push(monto);
+const deudasForm = document.querySelector("#deudas-form");
+const deudasInput = document.querySelector("#deudas-input");
+const deudas = document.querySelector("#deudas");
+
+deudasForm.addEventListener("submit", agregarItemsDeudas);
+
+function agregarItemsDeudas(e) {
+    e.preventDefault();
+
+    if (deudasInput.value != "") {
+        arrayDeudas.push(deudasInput.value);
+        let item = document.createElement("li");
+        item.innerText = deudasInput.value;
+        deudas.append(item);
+
+        // Guardar en localStorage después de agregar
+        localStorage.setItem('arrayDeudas', JSON.stringify(arrayDeudas));
+    } else {
+        alert("Input vacío!")
+    }
+
+    deudasInput.focus();
+    deudasForm.reset();
 }
 
-function agregarInversion(monto) {
-  inversiones.push(monto);
+const inversionesForm = document.querySelector("#inversiones-form");
+const inversionesInput = document.querySelector("#inversiones-input");
+const inversiones = document.querySelector("#inversiones");
+
+inversionesForm.addEventListener("submit", agregarItemsInvesiones);
+
+function agregarItemsInvesiones(e) {
+    e.preventDefault();
+
+    if (inversionesInput.value != "") {
+        arrayInversiones.push(inversionesInput.value);
+        let item = document.createElement("li");
+        item.innerText = inversionesInput.value;
+        inversiones.append(item);
+
+        // Guardar en localStorage después de agregar
+        localStorage.setItem('arrayInversiones', JSON.stringify(arrayInversiones));
+    } else {
+        alert("Input vacío!")
+    }
+
+    inversionesInput.focus();
+    inversionesForm.reset();
 }
 
-console.log("Tus gastos este mes son:");
-gastos.forEach(gasto => {
-  console.log(gasto);
+const btncalcular = document.querySelector("#btnCalcular");
+const resultadosElement = document.getElementById('resultados');
+
+btncalcular.addEventListener("click", () => {
+    let ingresoTotal = 0
+    for (let i = 0; i < arrayIngresos.length; i++) {
+        ingresoTotal += parseInt(arrayIngresos[i]);
+    }
+
+    let gastoTotal = 0;
+    for (let i = 0; i < arrayGastos.length; i++) {
+        gastoTotal += parseInt(arrayGastos[i]);
+    }
+
+    let deudaTotal = 0;
+    for (let i = 0; i < arrayDeudas.length; i++) {
+        deudaTotal += parseInt(arrayDeudas[i]);
+    }
+
+    const balance = (a, b, c) => {
+        return ingresoTotal - (gastoTotal + deudaTotal)
+    }
+
+    let inversionesTotal = 0;
+    for (let i = 0; i < arrayInversiones.length; i++) {
+        const parsedValue = parseInt(arrayInversiones[i]);
+        if (!isNaN(parsedValue)) {
+            inversionesTotal += parsedValue;
+        }
+    }
+
+    let proyecciones = inversionesTotal;
+    for (let i = 1; i <= 12; i++) {
+        const parsedValue = parseInt(inversionesInput.value * i);
+        if (!isNaN(parsedValue)) {
+            proyecciones += parsedValue;
+        }
+    }
+
+    localStorage.setItem("arrayIngresos", JSON.stringify(arrayIngresos));
+    localStorage.setItem("arrayGastos", JSON.stringify(arrayGastos));
+    localStorage.setItem("arrayDeudas", JSON.stringify(arrayDeudas));
+    localStorage.setItem("arrayInversiones", JSON.stringify(arrayInversiones));
+
+    resultadosElement.innerHTML = `
+    <p class="ingreso">Tu ingreso este mes es de $${ingresoTotal}</p>
+    <p class="gasto">El gasto total es: $${gastoTotal}</p>
+    <p class="deuda">Las deudas totales son: $${deudaTotal}</p>
+    <p class="balance">Tu dinero disponible este mes es: $${balance(ingresoTotal, gastoTotal, deudaTotal)}</p>
+    <p class= "inversiones"> Tus inversiones este mes fueron de: $${inversionesTotal}</p>
+    <p class="proyecciones">Estos serían tus ahorros, mes a mes, ${proyecciones} si tus inversiones se mantienen.</p>
+    `;
 });
 
-let gastoTotal = 0;
-for (let i = 0; i < gastos.length; i++) {
-  gastoTotal += gastos[i];
-}
-console.log("El gasto total es: $" + gastoTotal)
+const btnReset = document.querySelector("#reset")
+btnReset.addEventListener("click", () => {
+    localStorage.clear();
+})
 
-console.log("Tus deudas este mes son:");
-deudas.forEach(deuda => {
-  console.log(deuda);
-});
-
-let deudaTotal = 0;
-for (let i = 0; i < deudas.length; i++) {
-    deudaTotal += deudas[i];
-}
-console.log("Las deudas totales son: $" + deudaTotal)
-
-console.log("Tus inversiones este mes son:");
-inversiones.forEach(inversion => {
-  console.log(inversion);
-});
-
-for (let i = 1; i <=12; i++) {
-    console.log ("Estos serian tus ahorros, mes a mes, " + inversiones * i + " si tus inversiones se mantienen.")}
-
-
-const balance = (a, b, c) => {
-    return ingresosneto - (gastoTotal+ deudaTotal);
-}
-alert("Tu dinero disponible para este mes es $" + balance (ingresosneto, gastos, deudas));

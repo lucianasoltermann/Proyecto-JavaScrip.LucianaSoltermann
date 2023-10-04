@@ -35,3 +35,43 @@
     padding: 5px;
 
 }
+.botones{
+    display: flex;
+    flex-direction: row;
+    border: solid 3px color(blue);
+    justify-content: center;
+    padding: 5px;
+    margin: 5px;
+
+
+}
+.botones button {
+    border: solid 1px blue;
+    border-radius: 20px;
+    background-color: blue;
+    color: white;
+    padding: 5px;
+    margin: 5px;
+}
+
+.resultados{
+    font-family: 'Poppins', sans-serif;
+    border: 2px solid blue; 
+    color: blue;
+    margin: 10px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    
+}
+.mensaje {
+    font-size: 20px;
+    font-weight: bold;
+  
+}
+
+.ingreso, .gasto, .deuda, .balance, .proyecciones {
+    margin-bottom: 10px;
+}
