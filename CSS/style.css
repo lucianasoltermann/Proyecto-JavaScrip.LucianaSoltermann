@@ -12,7 +12,8 @@
 }
 .contenedorPrincipal{
     border: solid 3px; color: blue;
-    margin: 50px;
+    margin: 10px;
+    height: 70%;
     background-image: url(./img/foto.jpg);
     background-size: auto;
     background-repeat: no-repeat;
@@ -35,7 +36,17 @@
     padding: 5px;
 
 }
+.form-submit{
+    font-family: 'Poppins', sans-serif;
+    border: solid 1px blue;
+    border-radius: 20px;
+    background-color: blue;
+    color: white;
+    padding: 5px;
+    margin: 5px;
+}
 .botones{
+    font-family: 'Poppins', sans-serif;
     display: flex;
     flex-direction: row;
     border: solid 3px color(blue);
@@ -46,6 +57,7 @@
 
 }
 .botones button {
+    font-family: 'Poppins', sans-serif;
     border: solid 1px blue;
     border-radius: 20px;
     background-color: blue;
@@ -67,6 +79,7 @@
     
 }
 .mensaje {
+    font-family: 'Poppins', sans-serif;
     font-size: 20px;
     font-weight: bold;
   
@@ -74,4 +87,17 @@
 
 .ingreso, .gasto, .deuda, .balance, .proyecciones {
     margin-bottom: 10px;
+}
+
+.footer{
+    font-family: 'Poppins', sans-serif;
+    border: 2px solid blue; 
+    background-color: blue;
+    color: white;
+    margin: 50px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
 }
